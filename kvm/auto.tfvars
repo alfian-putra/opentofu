@@ -1,0 +1,5 @@
+libvirt_disk_path = "/opt/kvm/pool1"
+img_url = "https://ftp.riken.jp/Linux/fedora/releases/40/Cloud/x86_64/images/Fedora-Cloud-Base-Generic.x86_64-40-1.14.qcow2"
+vm_hostname = "fedora_terraform"
+ssh_username = "fedora"
+ssh_private_key = "~/.ssh/id_rsa"

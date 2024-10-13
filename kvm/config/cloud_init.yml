@@ -1,0 +1,25 @@
+#cloud-config
+# vim: syntax=yaml
+# examples:
+# https://cloudinit.readthedocs.io/en/latest/topics/examples.html
+bootcmd:
+  - echo 192.168.0.1 gw.homedns.xyz >> /etc/hosts
+runcmd:
+ - [ ls, -l, / ]
+ - [ sh, -xc, "echo $(date) ': hello world!'" ]
+ssh_pwauth: true
+disable_root: false
+chpasswd:
+  list: |
+     root:password
+  expire: false
+users:
+  - name: fedora
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/fedora
+    shell: /bin/bash
+    lock_passwd: false
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCmXswfnACVujjdnxkVsA+IKrpnNHlIqpl13sy1mbY6VzVizntyL8X4/80pgC1TmvlcSqWIOkdAQ+MIo1aBlmY03F21n1C3LO9Sb3pg/9KeEihoAQHZPVPnqYlIwnti9HA3QF1i/DeoYBtRvqalN4YRrR8tOUQXegwah9QubatnPj1SsMXbxP8iVV/x0cHP8Y05Q2v4fycnSfCzLb3a0QW4GGtCWbPQC2bmWSfNQUoCydRYqXYUfG0+j3tHcYSkl8RanQAk4+XYJBNSPs9h2BLO6omMj9N7fw3KI89gFi9BFFkydPHUcaC4AEN7DkuOCsah4m57aA18/+S2jHx/jR0/JmnKDbQF7d23d4bsqDt8FOsy/NcevyV3WZvYOWApTWbOPVXIo6cecRaoQSQKXycMq676x8r0dAkf8ycQ8DMbBxz1CO8hWta77V1Oz5c5xorJ03DnAeiz+T71tXyB8YJ2EEe0LpC5L5Knujh+BQLyzHeB8NPsBbGm6pdhwao6iME= gazelle@fedora
+final_message: "The system is finally up, after $UPTIME seconds"
